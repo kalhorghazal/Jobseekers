@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Post, Header} from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { Body, Controller, Get, Post, Header, Put, Delete, Query, Param, ParseIntPipe} from '@nestjs/common';
+import { ApiResponse, ApiQuery } from '@nestjs/swagger';
 import { BooksService } from './books.service';
 import CreateBookDto from './dto/create-book.dto';
 
@@ -18,5 +18,24 @@ export class BooksController {
     @ApiResponse({status: 200})
     getAll() {
       return this.bookServices.getAllBooks();
+    }
+
+    @Put()
+    @ApiResponse({status: 200, description: 'create book'})
+    @Header('Content-Type', 'application/json')
+    putBook(@Query('bookID', ParseIntPipe) bookID: number, @Body() book: CreateBookDto) {
+        return this.bookServices.updateBook(bookID, book);
+    }
+
+
+    @Delete()
+    @ApiResponse({ status: 200})
+    @ApiQuery({
+      name: 'bookID',
+      required: true,
+      type: String
+    })
+    deleteBook( @Query('bookID', ParseIntPipe) bookID: number ) {
+      return this.bookServices.deleteBook(bookID);
     }
 }
