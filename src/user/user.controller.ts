@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Header, ParseIntPipe, Post, Put, Query} from '@nestjs/common';
+import { Body, Controller, Get, Header, ParseIntPipe, Post, Put, Query, UseGuards} from '@nestjs/common';
 import { UserService } from './user.service';
 import {ApiResponse, ApiBearerAuth, ApiQuery} from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('users')
 export class UserController {
@@ -9,6 +10,9 @@ export class UserController {
 
 //'postUser()' will handle the creating of new User
   @Post('add')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiResponse({ status: 200})
   @ApiResponse({status: 200, description: 'Create user'})
   @Header('Content-Type', 'application/json')
   postUser( @Body() user: CreateUserDto) {
@@ -17,6 +21,8 @@ export class UserController {
 // 'getAll()' returns the list of all the existing users in the database
 
   @Get()
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({ status: 200})
   getAll() {
     return this.usersServices.getAllUsers();
@@ -25,6 +31,8 @@ export class UserController {
 //'getBooks()' return all the books which are associated with the user 
 // provided through 'userID' by the request  
   @Get('books')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({ status: 200})
   @ApiQuery({
     name: 'userID',

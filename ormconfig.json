@@ -1,10 +1,11 @@
 {
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "kalhorghazal",
-    "password": "810196675",
-    "database": "jobseekers",
-    "entities": ["dist/**/**.entity{.ts,.js}"],
-    "synchronize": true
-}
+    "type": "sqlite",
+    "database": "./database.sqlite",
+    "synchronize": "true",
+    "entities": [
+      "dist/db/entity/**/*.js"
+    ],
+    "cli": {
+      "entitiesDir": "src/db/entity"
+    }
+ } 
