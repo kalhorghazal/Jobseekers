@@ -13,3 +13,4 @@ export default class UserEntity extends BaseEntity {
   @OneToMany( type => BookEntity , book => book.user)
   books: BookEntity[];
 }
+
