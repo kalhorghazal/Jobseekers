@@ -16,12 +16,6 @@ export default class SampleWorkEntity extends BaseEntity
   @Column({ length: 500 })
   photoAddress: string;
 
-  @Column({ length: 500 })
-  tags: Array<string>;
-
-  @Column({ length: 500 })
-  skills: Array<string>;
-
   @ManyToOne(() => UserEntity, user=>user.sampleWorks)
   user: UserEntity;
 }
