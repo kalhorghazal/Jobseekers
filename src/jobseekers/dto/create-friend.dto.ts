@@ -4,13 +4,15 @@ export default class CreateFriendDto {
 
     @ApiProperty({
         type: "string",
-        description: 'Friend Name'
+        description: 'Friend Name',
+        default: 'Ghazal',
     })
     readonly name: string;
 
     @ApiProperty({
         type: "string",
-        description: 'Friend Email'
+        description: 'Friend Email',
+        default: 'kalhorghazal1378@gmail.com'
     })
     readonly Email: string;
 
