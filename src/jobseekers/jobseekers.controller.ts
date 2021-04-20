@@ -12,14 +12,14 @@ import { worker } from 'cluster';
 export class JobseekersController {
     constructor(private readonly jobseekersService: JobseekersService) {}
 
-    @Post('inviteFriend')
+    @Post('friends')
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     inviteFriend( @Body() friend: CreateFriendDto) {
       return this.jobseekersService.insertFriend(friend);
     }
 
-    @Post('submitTicket')
+    @Post('tickets')
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     submitTicket( @Body() ticket: CreateTicketDto) {
@@ -34,14 +34,14 @@ export class JobseekersController {
       return this.jobseekersService.getAllTickets();
     }
 
-    @Post('submitFinancialInfo')
+    @Post('financialInfo')
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     submitFinancialInfo( @Body() info: CreateFinancialInfoDto) {
       return this.jobseekersService.insertFinancialInfo(info);
     }
 
-    @Put('editFinancialInfo')
+    @Put('financialInfo')
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @ApiResponse({status: 200})
@@ -50,14 +50,14 @@ export class JobseekersController {
         return this.jobseekersService.updateFinancialInfo(infoID, info);
     }
 
-    @Post('addSampleWork')
+    @Post('sampleWorks')
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     addSampleWork( @Body() work: CreateSampleWorkDto) {
       return this.jobseekersService.insertSampleWork(work);
     }
 
-    @Delete('deleteSampleWork')
+    @Delete('sampleWorks')
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @ApiResponse({ status: 200})
